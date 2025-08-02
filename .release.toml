@@ -1,0 +1,11 @@
+sign-commit = false
+sign-tag = false
+push = true
+publish = true
+tag-prefix = "v"
+allow-branch = ["main"]
+
+[changelog]
+update = true
+path = "changelog.md"
+heading = "## "

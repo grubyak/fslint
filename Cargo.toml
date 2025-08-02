@@ -1,0 +1,16 @@
+[package]
+name = "fslint"
+version = "0.1.0"
+edition = "2021"
+authors = ["grubyak"]
+description = "filesystem linter with rules for naming, metadata, permissions, size and more"
+license = "MIT"
+repository = "https://github.com/grubyak/fslint"
+
+[dependencies]
+walkdir = "2.5.0"
+glob = "0.3.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.142"
+thiserror = "2.0.12"
+clap = { version = "4.5.42", features = ["derive"] }
