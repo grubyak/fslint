@@ -1,11 +1,11 @@
 mod utils;
+
 use utils::args::Args;
+use utils::walk::walk_paths;
 
 fn main() {
-  println!("hello, world");
-
   let args = Args::parse_args();
-  println!("scanning {}", args.root);
-
-  utils::dummy::hey();
+  for entry in walk_paths(&args.root) {
+    println!("{}", entry.path().display());
+  }
 }

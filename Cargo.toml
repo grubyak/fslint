@@ -3,7 +3,7 @@ name = "fslint"
 version = "0.1.0"
 edition = "2021"
 authors = ["grubyak"]
-description = "filesystem linter with rules for naming, metadata, permissions, size and more"
+description = "Linter for filesystem consistency: names, metadata, permissions and sizes."
 license = "MIT"
 repository = "https://github.com/grubyak/fslint"
 
