@@ -13,6 +13,13 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: set up git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: install rust
         uses: dtolnay/rust-toolchain@stable
