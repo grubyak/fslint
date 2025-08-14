@@ -1,12 +1,15 @@
-use crate::{fs::metadata, utils::fsinfo};
+use serde::Serialize;
 use std::collections::HashMap;
 use std::os::unix::fs::MetadataExt;
 use std::path::PathBuf;
 use walkdir::DirEntry;
 
-#[derive(Debug)]
+use crate::{fs::metadata, utils::fsinfo};
+
+#[derive(Serialize, Debug)]
 pub struct Node {
-  pub path: PathBuf,
+  pub entry: PathBuf,
+  pub directory: String,
   pub name: String,
   pub kind: fsinfo::kind::Kind,
   pub size: u64,
@@ -26,7 +29,8 @@ impl Node {
 
     match entry.metadata() {
       Ok(node) => Node {
-        path: path.to_path_buf(),
+        entry: path.to_path_buf(),
+        directory: path.parent().unwrap().to_str().unwrap().to_string(),
         name,
         kind: fsinfo::kind::detect(&node),
         size: node.len(),
@@ -39,7 +43,8 @@ impl Node {
         metadata: metadata::collect(path),
       },
       Err(_) => Node {
-        path: path.to_path_buf(),
+        entry: path.to_path_buf(),
+        directory: "".to_string(),
         name,
         kind: fsinfo::kind::Kind::Other,
         size: 0,

@@ -1,6 +1,7 @@
+use serde::Serialize;
 use std::fs::Metadata;
 
-#[derive(Debug)]
+#[derive(Serialize, Debug)]
 pub enum Kind {
   File,
   Dir,
