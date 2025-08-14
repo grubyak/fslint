@@ -29,10 +29,16 @@ Options:
 Validate your config against [schema.json](https://raw.githubusercontent.com/grubyak/fslint/main/schema.json) or generate a local one with:
 
 ```zsh
-$ fslint -s
+$ fslint -s > schema.json
 ```
 
 <!-- [schemastore](https://www.schemastore.org/fslint.json) -->
+
+To enable schema validation in your editor, add the following to your `fslint.json`:
+
+```json
+"$schema": "https://raw.githubusercontent.com/grubyak/fslint/main/schema.json"
+```
 
 ### sample config
 
