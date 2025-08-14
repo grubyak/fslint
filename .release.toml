@@ -4,6 +4,7 @@ push = true
 publish = true
 tag-prefix = "v"
 allow-branch = ["main"]
+dev-version = true
 
 [changelog]
 update = true
