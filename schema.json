@@ -1,0 +1,110 @@
+{
+  "$defs": {
+    "ConfigEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "exclude": {
+          "default": [],
+          "description": "glob patterns for files to exclude from configuration entry",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "include": {
+          "default": [],
+          "description": "glob patterns for files to apply configuration entry",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "rules": {
+          "additionalProperties": false,
+          "description": "rules to apply to matching files",
+          "properties": {
+            "exif-has-capture-datetime": {
+              "additionalProperties": false,
+              "description": "guards presence and validity of capture date and time",
+              "properties": {
+                "date": {
+                  "description": "require capture date",
+                  "type": ["boolean", "null"]
+                },
+                "level": {
+                  "default": "warn",
+                  "description": "severity level (default: warn)",
+                  "enum": ["off", "warn", "error"],
+                  "type": "string"
+                },
+                "min_year": {
+                  "description": "minimum allowed year for capture date",
+                  "format": "uint16",
+                  "maximum": 65535,
+                  "minimum": 0,
+                  "type": ["integer", "null"]
+                },
+                "reject_future": {
+                  "description": "reject capture dates later than the current date",
+                  "type": ["boolean", "null"]
+                },
+                "time": {
+                  "description": "require capture time",
+                  "type": ["boolean", "null"]
+                }
+              },
+              "required": [],
+              "type": "object"
+            },
+            "exif-has-coords": {
+              "additionalProperties": false,
+              "description": "guards presence of gps coordinates",
+              "properties": {
+                "latitude": {
+                  "description": "require gps latitude",
+                  "type": ["boolean", "null"]
+                },
+                "level": {
+                  "default": "warn",
+                  "description": "severity level (default: warn)",
+                  "enum": ["off", "warn", "error"],
+                  "type": "string"
+                },
+                "longitude": {
+                  "description": "require gps longitude",
+                  "type": ["boolean", "null"]
+                }
+              },
+              "required": [],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": ["rules"],
+      "type": "object"
+    }
+  },
+  "$id": "https://www.schemastore.org/fslint.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "see https://crates.io/crates/fslint",
+  "properties": {
+    "$schema": {
+      "default": null,
+      "description": "json schema uri for tooling and editor integration",
+      "type": ["string", "null"]
+    },
+    "entries": {
+      "default": [],
+      "description": "array of configuration entries with their associated rules",
+      "items": {
+        "$ref": "#/$defs/ConfigEntry"
+      },
+      "type": "array"
+    }
+  },
+  "title": "fslint configuration file schema",
+  "type": "object"
+}
