@@ -1,0 +1,40 @@
+[changelog]
+header = "# changelog\n\n"
+trim = true
+body = """
+{% if version %}## {{ version }}, {{ timestamp | date(format="%Y-%m-%d") }}{% else %}## unreleased{% endif %}
+
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | upper_first }}
+{% for commit in commits -%}
+- {{ commit.message | split(pat="\n") | first | trim }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/grubyak/fslint/commit/{{ commit.id }}))
+{% endfor %}
+
+{% endfor %}
+"""
+footer = ""
+
+[git]
+conventional_commits = true
+filter_unconventional = true
+tag_pattern = "v[0-9]+\\.[0-9]+\\.[0-9]+"
+commit_sort = "newest"
+parse_issues = true
+
+commit_preprocessors = [
+  { pattern = "Merge pull request #([0-9]+) from .*", replace = "" }
+]
+
+commit_parsers = [
+  { message = "^feat",     group = "✨ features" },
+  { message = "^fix",      group = "🐛 fixes" },
+  { message = "^perf",     group = "⚡ performance" },
+  { message = "^refactor", group = "♻️ refactor" },
+  { message = "^ci",       group = "👷 ci" },
+  { message = "^revert",   group = "⏪ reverts" },
+  { message = "^docs",     group = "📝 docs",   skip = true },
+  { message = "^build",    group = "📦 build",  skip = true },
+  { message = "^test",     group = "🧪 tests",  skip = true },
+  { message = "^chore",    group = "🔧 chore",  skip = true },
+  { message = ".*",        group = "📌 other",  skip = true }
+]

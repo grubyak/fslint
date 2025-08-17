@@ -2,7 +2,7 @@ use rexiv2;
 use serde::Serialize;
 use std::path::Path;
 
-use crate::fs::metadata::{MetadataProvider, Value};
+use crate::fs::domain::{MetadataProvider, Value};
 
 #[derive(Serialize, Debug, Default)]
 pub struct Metadata {

@@ -2,7 +2,7 @@ mod has_capture;
 mod has_coords;
 
 use crate::fs::{
-  metadata::exif::provider::Provider,
+  domain::exif::provider::Provider,
   rule::{prefix_rules, Rule},
 };
 

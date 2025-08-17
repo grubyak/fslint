@@ -1,7 +1,7 @@
 use schemars::JsonSchema;
 use serde::Deserialize;
 
-use crate::{declare_rule, fs::metadata::exif::utils::get_exif};
+use crate::{declare_rule, fs::domain::exif::utils::get_exif};
 
 #[derive(Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]

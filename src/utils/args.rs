@@ -10,8 +10,8 @@ pub struct Args {
   #[arg(short, long, action = clap::ArgAction::Count)]
   pub verbose: u8,
 
-  #[arg(short, long, action = clap::ArgAction::SetTrue)]
-  pub schema: bool,
+  #[arg(short, long, action = clap::ArgAction::Count)]
+  pub schema: u8,
 }
 
 pub fn parse() -> Args {
@@ -21,5 +21,6 @@ pub fn parse() -> Args {
     args.path = abs;
   }
 
+  log::debug!("args: {args:?}");
   args
 }

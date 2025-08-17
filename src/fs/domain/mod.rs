@@ -1,4 +1,5 @@
 pub mod exif;
+pub mod fs;
 pub mod id3;
 
 use serde::Serialize;
@@ -15,8 +16,14 @@ pub enum Value {
 
 pub trait MetadataProvider {
   fn key(&self) -> &'static str;
-  fn extensions(&self) -> &'static [&'static str];
-  fn collect(&self, path: &Path) -> Option<Value>;
+
+  fn extensions(&self) -> &'static [&'static str] {
+    &[]
+  }
+
+  fn collect(&self, _path: &Path) -> Option<Value> {
+    None
+  }
 
   fn supports(&self, ext: &str) -> bool {
     self
