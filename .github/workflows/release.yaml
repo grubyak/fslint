@@ -34,13 +34,6 @@ jobs:
       - name: install cargo-release
         run: cargo install cargo-release --locked
 
-      - name: run cargo release
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
-        run: cargo release patch --no-confirm --execute
-
       - name: generate changelog
         uses: orhun/git-cliff-action@v4
         with:
@@ -51,8 +44,12 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: commit changelog
-        run: |
-          git add changelog.md
-          git commit -m "chore: update changelog [skip ci]" || echo "no changes to commit"
-          git push
+      - name: stage changelog
+        run: git add changelog.md
+
+      - name: run cargo release
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
+        run: cargo release patch --no-confirm --execute

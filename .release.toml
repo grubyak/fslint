@@ -8,3 +8,7 @@ dev-version = true
 
 [changelog]
 update = false
+
+[commit]
+message = "release(fslint): v{{version}}"
+
