@@ -44,8 +44,11 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: stage changelog
-        run: git add changelog.md
+      - name: commit changelog
+        run: |
+          git add changelog.md
+          git commit -m "chore: update changelog [skip ci]" || echo "no changes to commit"
+          git push
 
       - name: run cargo release
         env:
