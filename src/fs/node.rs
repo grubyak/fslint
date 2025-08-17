@@ -4,7 +4,7 @@ use std::os::unix::fs::MetadataExt;
 use std::path::PathBuf;
 use walkdir::DirEntry;
 
-use crate::{fs::metadata, utils::fsinfo};
+use crate::{fs::domain, utils::fsinfo};
 
 #[derive(Serialize, Debug)]
 pub struct Node {
@@ -19,7 +19,7 @@ pub struct Node {
   pub created: i64,
   pub accessed: i64,
   pub modified: i64,
-  pub metadata: HashMap<String, metadata::Value>,
+  pub metadata: HashMap<String, domain::Value>,
 }
 
 impl Node {
@@ -40,7 +40,7 @@ impl Node {
         created: node.created().map(fsinfo::timestamp::to_unix).unwrap_or(0),
         accessed: node.accessed().map(fsinfo::timestamp::to_unix).unwrap_or(0),
         modified: node.modified().map(fsinfo::timestamp::to_unix).unwrap_or(0),
-        metadata: metadata::collect(path),
+        metadata: domain::collect(path),
       },
       Err(_) => Node {
         entry: path.to_path_buf(),

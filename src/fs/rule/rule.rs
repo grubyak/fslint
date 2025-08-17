@@ -1,7 +1,7 @@
 use serde_json::Value;
 use std::{collections::BTreeMap, fmt};
 
-use crate::fs::{metadata::MetadataProvider, node, rule};
+use crate::fs::{domain::MetadataProvider, node, rule};
 
 #[derive(Debug)]
 pub struct RuleReport {

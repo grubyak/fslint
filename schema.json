@@ -77,6 +77,46 @@
               },
               "required": [],
               "type": "object"
+            },
+            "fs-broken-symlink": {
+              "additionalProperties": false,
+              "description": "guards that symbolic links resolve to existing targets",
+              "properties": {
+                "level": {
+                  "default": "warn",
+                  "description": "severity level (default: warn)",
+                  "enum": ["off", "warn", "error"],
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "type": "object"
+            },
+            "fs-permission": {
+              "additionalProperties": false,
+              "description": "guards file permission mode, owner, and group",
+              "properties": {
+                "group": {
+                  "description": "enforce specific group",
+                  "type": ["string", "null"]
+                },
+                "level": {
+                  "default": "warn",
+                  "description": "severity level (default: warn)",
+                  "enum": ["off", "warn", "error"],
+                  "type": "string"
+                },
+                "mode": {
+                  "description": "enforce mode (octal or symbolic, e.g. \"0644'\" or \"rw-r--r--\")",
+                  "type": ["string", "null"]
+                },
+                "owner": {
+                  "description": "enforce specific owner",
+                  "type": ["string", "null"]
+                }
+              },
+              "required": [],
+              "type": "object"
             }
           },
           "type": "object"

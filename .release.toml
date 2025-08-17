@@ -7,6 +7,8 @@ allow-branch = ["main"]
 dev-version = true
 
 [changelog]
-update = true
-path = "changelog.md"
-heading = "## "
+update = false
+
+[commit]
+message = "release(fslint): v{{version}}"
+

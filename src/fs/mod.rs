@@ -1,18 +1,23 @@
 pub mod config;
-pub mod metadata;
+pub mod domain;
+pub mod linter;
 pub mod node;
 pub mod rule;
 
 use serde_json::Value;
 use std::collections::BTreeMap;
 
-use crate::fs::{metadata::exif, rule::Rule};
+use crate::fs::{
+  domain::{exif, fs},
+  rule::Rule,
+};
 
 type RuleProvider = fn() -> Vec<(String, Box<dyn Rule>)>;
 
 pub fn get_rules() -> Vec<(String, Box<dyn Rule>)> {
   let providers: Vec<RuleProvider> = vec![
     exif::rules::get_rules,
+    fs::rules::get_rules,
     // id3::get_rules,
   ];
 

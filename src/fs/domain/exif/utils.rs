@@ -1,5 +1,5 @@
 use crate::fs::{
-  metadata::{exif, MetadataProvider, Value},
+  domain::{exif, MetadataProvider, Value},
   node::Node,
   rule::RuleReport,
 };
