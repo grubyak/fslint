@@ -2,6 +2,10 @@
 
 `fslint` is a file linter (alpha stage — work in progress) that scans the current directory (or `--path`) using `fslint.json`, checking only files matching the `include` patterns.
 
+### rules
+
+See full list of supported [linter rules](./linter-rules.md).
+
 ### installation
 
 ```zsh
